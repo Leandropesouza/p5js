@@ -1,0 +1,66 @@
+// fantasia, aventura, drama, ação, ficção cientifica, terror, mistério, comédia
+
+// a viagem do chihiro, LIVRE, fantasia, aventura
+// shrek, LIVRE, fantasia, comédia
+// as aventuras de pi, 10, drama, fantasia, aventura
+// os farofeiros, 12, comédia
+// MIB-Homens de preto, 12, ação, fição cientifica
+// Bumblebee, 12, ação, ficção cientifica
+// Buble, 12, ação, ficção cientifica
+// pânico, 14, terror, mistério
+// anaconda, 14, terror, aventura
+// O massacre da serra elétrica, terror/crime
+
+let campoIdade;
+let campoFantasia;
+let campoAventura;
+
+function setup() {
+  createCanvas(800, 400);
+  createElement("h2", "Recomendador de filmes");
+  createSpan("Sua idade:");
+  campoIdade = createInput("5");
+  campoFantasia = createCheckbox("Gosta de fantasia?");
+  campoAventura = createCheckbox("Gosta de aventura?");
+}
+
+function draw() {
+  background("white");
+  let idade = campoIdade.value();
+  let gostaDeFantasia = campoFantasia.checked();
+  let gostaDeAventura = campoAventura.checked();
+  let recomendacao = geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura);
+
+  fill(color(76, 0, 115));
+  textAlign(CENTER, CENTER);
+  textSize(38);
+  text(recomendacao, width / 2, height / 2);
+}
+
+function geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura) {
+  if (idade >= 10) {
+    if (idade >= 14) {
+      return "a viagem de chihiro";
+    } else {
+      if (idade >= 12) {
+        if(gostaDeFantasia || gostaDeAventura) {
+          return "shrek";          
+        } else{
+         return "as aventuras de pi";
+        }
+      } else {
+        if (gostaDeFantasia) {
+          return "os farofeiros";
+        } else {
+          return "MIB-homens de preto";
+        }
+      }
+    }
+  } else {
+    if (gostaDeFantasia) {
+      return "anaconda";
+    } else {
+      return "buble";
+    }
+  }
+}
